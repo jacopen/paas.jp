@@ -7,8 +7,9 @@ env:
     - GIT_COMMITTER_EMAIL=jacopen@gmail.com
     - GIT_AUTHOR_NAME=Kazuto Kusama
     - GIT_AUTHOR_EMAIL=jacopen@gmail.com
+    - secure: 3VI84A5AobPTNtaLBuOc0hR2XraVkPMXz4dYzaFL2Tp9Zm6KOM3jWgHXJmivq1Jl1+Mdzb3HvyNI2tIARV5X+r3OavuBS2dEXCcQzZ6UHOT07KG6LznbOcM+qrPC55UpwOa0Hm6gfsSKxFhnpisKxAU1kUuhFGXP+R63IUlHICw=
 before_script:
-  - git clone --quiet git@github.com:jacopen/paas.jp.git build
+  - git clone --quiet https://github.com/jacopen/paas.jp.git build
   - pushd build
   - git checkout -b gh-pages
   - popd
@@ -17,3 +18,4 @@ after_success:
   - cd build
   - git add -A
   - git commit -m 'Update pages'
+  - '[ "$TRAVIS_BRANCH" == "master" ] && [ $GH_TOKEN ] && git push --quiet https://$GH_TOKEN@github.com/jacopen/paas.jp.git gh-pages 2> /dev/null'
