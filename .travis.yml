@@ -1,0 +1,19 @@
+---
+language: ruby
+script: bundle exec middleman build
+env:
+  global:
+    - GIT_COMMITTER_NAME=Kazuto Kusama
+    - GIT_COMMITTER_EMAIL=jacopen@gmail.com
+    - GIT_AUTHOR_NAME=Kazuto Kusama
+    - GIT_AUTHOR_EMAIL=jacopen@gmail.com
+before_script:
+  - git clone --quiet git@github.com:jacopen/paas.jp.git build
+  - pushd build
+  - git checkout -b gh-pages
+  - popd
+
+after_success:
+  - cd build
+  - git add -A
+  - git commit -m 'Update pages'
